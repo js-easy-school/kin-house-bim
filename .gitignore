@@ -1,0 +1,21 @@
+# Blender recovery files
+*.blend1
+*.blend2
+*.blend@
+
+# Python cache and local tooling
+__pycache__/
+*.py[cod]
+.venv/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Local-only outputs
+*.log
+temp/
+tmp/

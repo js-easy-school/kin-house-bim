@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e0f">
+  <title>KIN House — BIM-проект</title>
+  <meta name="description" content="Интерактивный просмотр концептуального BIM-проекта частного дома KIN House.">
+  <meta property="og:title" content="KIN House — концептуальный BIM-проект">
+  <meta property="og:description" content="Интерактивная 3D-модель, планы, IFC4 и исходные файлы Blender/Bonsai.">
+  <meta property="og:image" content="https://js-easy-school.github.io/kin-house-bim/renders/exterior-hero.jpg">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://js-easy-school.github.io/kin-house-bim/">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.3.1/dist/model-viewer.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#viewer" aria-label="KIN House — наверх">
+      <span class="brand-mark">K/H</span>
+      <span><b>KIN HOUSE</b><small>CONCEPT BIM · 01</small></span>
+    </a>
+    <div class="top-specs" aria-label="Основные параметры">
+      <span>215 м² полезной</span><i></i><span>2 этажа</span><i></i><span>IFC4 · LOD 200</span>
+    </div>
+    <div class="top-actions">
+      <a class="button button-quiet" href="project/kin-house.ifc" download>Скачать IFC</a>
+      <button class="button button-accent" id="openBonsai" type="button">Открыть в Bonsai</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="viewer-shell" id="viewer">
+      <div class="viewer-stage">
+        <model-viewer
+          id="houseModel"
+          src="project/kin-house.glb"
+          poster="renders/exterior-hero.jpg"
+          alt="Трёхмерная модель дома KIN House"
+          camera-controls
+          touch-action="pan-y"
+          shadow-intensity="1.15"
+          shadow-softness="0.75"
+          exposure="1.15"
+          environment-image="neutral"
+          tone-mapping="neutral"
+          camera-orbit="32deg 69deg auto"
+          min-camera-orbit="auto 18deg auto"
+          max-camera-orbit="auto 88deg auto"
+          interaction-prompt="none">
+          <div class="model-loader" slot="progress-bar">
+            <span></span><small>Загрузка 3D-модели…</small>
+          </div>
+        </model-viewer>
+        <div class="stage-topline">
+          <span class="live-dot"></span>
+          <span>Интерактивная модель</span>
+          <span class="stage-hint">вращайте мышью · колесо — масштаб</span>
+        </div>
+        <div class="view-controls" aria-label="Управление моделью">
+          <button type="button" id="resetView">Исходный вид</button>
+          <button type="button" id="toggleSpin" aria-pressed="false">Автовращение</button>
+          <button type="button" id="fullScreen">На весь экран</button>
+        </div>
+        <div class="axis-tag" aria-hidden="true"><b>N</b><span>↑</span></div>
+      </div>
+
+      <aside class="project-brief">
+        <div class="eyebrow"><span>Детализированная BIM-модель</span><b>v1.2</b></div>
+        <h1>Дом из трёх<br>связанных объёмов</h1>
+        <p class="lead">Светлый архитектурный бетон, обожжённое дерево и тёплое остекление. Композиция повторяет характер исходного дома, а внутри собрана полноценная семейная программа.</p>
+
+        <dl class="metrics">
+          <div><dt>Полезная площадь</dt><dd>215<small>м²</small></dd></div>
+          <div><dt>Габарит пятна</dt><dd>14,8 × 10,8<small>м</small></dd></div>
+          <div><dt>Высота конька</dt><dd>9,8<small>м</small></dd></div>
+          <div><dt>Комнаты</dt><dd>3 + 1<small>спальни + кабинет</small></dd></div>
+        </dl>
+
+        <div class="status-block">
+          <div class="status-row ok"><span>✓</span><p><b>Проработано</b>Кровли, стыки, окна и фасадные детали</p></div>
+          <div class="status-row warn"><span>!</span><p><b>До стройки</b>Привязка участка, геология и расчёты</p></div>
+        </div>
+
+        <div class="finish-strip" aria-label="Основные материалы">
+          <span class="swatch concrete"></span><span class="swatch timber"></span><span class="swatch glass"></span>
+          <p><b>Палитра фасада</b><small>бетон · чёрное дерево · стекло</small></p>
+        </div>
+      </aside>
+    </section>
+
+    <nav class="section-tabs" aria-label="Разделы проекта">
+      <button class="active" data-tab="views" type="button">Виды</button>
+      <button data-tab="plans" type="button">Планировки</button>
+      <button data-tab="bim" type="button">BIM-структура</button>
+      <button data-tab="files" type="button">Файлы</button>
+    </nav>
+
+    <section class="tab-panel active" id="tab-views">
+      <div class="section-heading">
+        <div><span>01 / АРХИТЕКТУРА</span><h2>Контрольные виды</h2></div>
+        <p>Три вида построены из одной Blender-модели. Нажмите на изображение, чтобы открыть крупнее.</p>
+      </div>
+      <div class="view-grid">
+        <button class="view-card wide" data-image="renders/exterior-hero.jpg" type="button">
+          <img src="renders/exterior-hero.jpg" alt="Перспективный вид KIN House">
+          <span><b>A.01</b> Главная перспектива</span>
+        </button>
+        <button class="view-card" data-image="renders/axonometric.jpg" type="button">
+          <img src="renders/axonometric.jpg" alt="Проверочная модель KIN House в Bonsai">
+          <span><b>A.02</b> Фактическая модель Bonsai / IFC</span>
+        </button>
+        <button class="view-card" data-image="renders/south-elevation.jpg" type="button">
+          <img src="renders/south-elevation.jpg" alt="Южный фасад KIN House">
+          <span><b>A.03</b> Южный фасад</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-plans">
+      <div class="section-heading">
+        <div><span>02 / ПРОГРАММА</span><h2>Планировки 215 м²</h2></div>
+        <div class="level-switch" role="group" aria-label="Выбор этажа">
+          <button class="active" data-level="ground" type="button">1 этаж · 126 м²</button>
+          <button data-level="upper" type="button">2 этаж · 89 м²</button>
+        </div>
+      </div>
+      <div class="plan-layout">
+        <div class="plan-canvas-wrap">
+          <svg id="planSvg" viewBox="0 0 1480 1080" role="img" aria-label="План первого этажа"></svg>
+          <div class="north-mark"><b>N</b><span>↑</span></div>
+          <div class="scale-mark"><span></span>5 м</div>
+        </div>
+        <div class="room-schedule">
+          <div class="schedule-head"><span>Помещение</span><span>Площадь</span></div>
+          <div id="roomList"></div>
+          <div class="schedule-total"><span>Итого этаж</span><b id="levelTotal">126,0 м²</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-bim">
+      <div class="section-heading">
+        <div><span>03 / OPENBIM</span><h2>Что находится внутри IFC</h2></div>
+        <p>Это не только форма дома: элементы распределены по зданию, этажам и классам IFC.</p>
+      </div>
+      <div class="bim-layout">
+        <div class="ifc-tree" aria-label="Структура IFC">
+          <div class="tree-row root"><span>⌄</span><b>IfcProject</b><small>KIN House</small></div>
+          <div class="tree-row l1"><span>⌄</span><b>IfcSite</b><small>Условный участок</small></div>
+          <div class="tree-row l2"><span>⌄</span><b>IfcBuilding</b><small>KIN House</small></div>
+          <div class="tree-row l3"><span>⌄</span><b>IfcBuildingStorey</b><small>01 Первый этаж</small><em>126 м²</em></div>
+          <div class="tree-row l4"><span>·</span><b>IfcSpace</b><small>12 помещений</small></div>
+          <div class="tree-row l3"><span>⌄</span><b>IfcBuildingStorey</b><small>02 Второй этаж</small><em>89 м²</em></div>
+          <div class="tree-row l4"><span>·</span><b>IfcSpace</b><small>9 помещений</small></div>
+          <div class="tree-row l3"><span>·</span><b>IfcBuildingStorey</b><small>03 Кровля</small></div>
+        </div>
+        <div class="bim-stats">
+          <div><strong>21</strong><span>пространство<br><small>IfcSpace</small></span></div>
+          <div><strong>41</strong><span>стена<br><small>IfcWall</small></span></div>
+          <div><strong>4</strong><span>перекрытия<br><small>IfcSlab</small></span></div>
+          <div><strong>3</strong><span>крыши<br><small>IfcRoof</small></span></div>
+          <div><strong>7</strong><span>окон<br><small>IfcWindow</small></span></div>
+          <div><strong>2</strong><span>двери<br><small>IfcDoor</small></span></div>
+        </div>
+      </div>
+      <div class="notice">
+        <b>Статус модели: концепция / LOD 200.</b>
+        <p>Размеры и площади пригодны для обсуждения архитектуры. Фундаменты, сечения конструкций, инженерия и узлы пока не рассчитаны — их нельзя отдавать строителям без профессиональной разработки.</p>
+      </div>
+    </section>
+
+    <section class="tab-panel" id="tab-files">
+      <div class="section-heading">
+        <div><span>04 / ВЫДАЧА</span><h2>Комплект проекта</h2></div>
+        <p>Все файлы согласованы между собой и сохранены локально на этом компьютере.</p>
+      </div>
+      <div class="file-list">
+        <a href="project/kin-house.ifc" download><span class="file-type">IFC</span><p><b>kin-house.ifc</b><small>Открытая BIM-модель для Bonsai и других BIM-программ</small></p><em>Скачать</em></a>
+        <a href="project/kin-house-bonsai.blend" download><span class="file-type">BIM</span><p><b>kin-house-bonsai.blend</b><small>IFC-проект, уже открытый и сохранённый через Bonsai</small></p><em>Скачать</em></a>
+        <a href="project/kin-house.blend" download><span class="file-type">BLD</span><p><b>kin-house.blend</b><small>Визуализационная сцена с материалами, светом и камерами</small></p><em>Скачать</em></a>
+        <a href="project/kin-house.glb" download><span class="file-type">3D</span><p><b>kin-house.glb</b><small>Облегчённая модель для просмотра в браузере</small></p><em>Скачать</em></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><b>KIN HOUSE</b><span>Concept BIM · generated 01.08.2026</span></div>
+    <p>Для строительства обязательны: топосъёмка, геология, нормы региона, расчёт конструкций и инженерных систем.</p>
+  </footer>
+
+  <dialog id="imageDialog">
+    <button type="button" aria-label="Закрыть">×</button>
+    <img src="" alt="Крупный проектный вид">
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

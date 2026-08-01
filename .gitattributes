@@ -1,0 +1,10 @@
+*.blend binary
+*.glb binary
+*.jpg binary
+*.ifc linguist-language=STEP
+*.ifc text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.py text eol=lf
